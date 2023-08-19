@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  applicationName:
+    Description: Application Name
+    Type: String
+    Default: aws-stack-update
+  applicationId:
+    Description: Application ID
+    Type: String
+    Default: 1
+  productOwner:
+    Description: Product Owner Email
+    Type: String
+    Default: test@gmail.com
+    MinLength: "1"
+    MaxLength: "255"
+  environment:
+    Description: Stage type
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - qa
+      - test
+      - prod
+
+Resources:
+  S3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !Sub "sss-${environment}-${AWS::Region}-s3-bucket"
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: applicationName
+          Value: !Ref applicationName
+        - Key: applicationId
+          Value: !Ref applicationId
+        - Key: productOwner
+          Value: !Ref productOwner
+        - Key: environment
+          Value: !Ref environment
+
+Outputs:
+  S3Bucket:
+    Description: S3 Bucket for CFT Update
+    Value: !Ref S3Bucket

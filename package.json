@@ -1,0 +1,16 @@
+{
+  "name": "aws-cft-update",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "get:stack-cfts": "node stackGetScript.js",
+    "update:stacks": "node stackUpdateScript.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-cloudformation": "^3.363.0"
+  },
+  "type": "module"
+}
